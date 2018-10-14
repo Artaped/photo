@@ -8,6 +8,7 @@
 </p>
 
 <p>Просто ради фана и изучения Laravel и лучшего понимания PHP. Сайт картинок</p>
+<p>В отличии от блога тут миграции работают =)</p>
 <p>Спасибо Marlindev  и ресурсу https://coursehunters.net/course/samyy-ponyatnyy-kurs-po-php-dlya-nachinayushchih</p>
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
