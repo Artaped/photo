@@ -35,9 +35,9 @@
                         <td><?=$category['id']?></td>
                         <td><?=$category['title']?></td>
                         <td>
-                            <a href="#" class="btn btn-info">
+                            <!--<a href="#" class="btn btn-info">
                                 <i class="fa fa-eye"></i>
-                            </a>
+                            </a>-->
                             <a href="/admin/category/edit/<?=$category['id']?>" class="btn btn-warning">
                                 <i class="fa fa-pencil"></i>
                             </a>

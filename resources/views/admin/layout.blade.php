@@ -84,9 +84,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">Навигация</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li><a href="/admin/photo"><i class="fa fa-image"></i> <span>Все картинки</span></a></li>
+                <li><a href="/admin/photos"><i class="fa fa-image"></i> <span>Все картинки</span></a></li>
                 <li><a href="/admin/category"><i class="fa fa-list"></i> <span>Категории</span></a></li>
-                <li><a href="/admin/user"><i class="fa fa-group"></i> <span>Пользователи</span></a></li>
+                <li><a href="/admin/tags"><i class="fa fa-list"></i> <span>Тэги</span></a></li>
+                <li><a href="/admin/users"><i class="fa fa-group"></i> <span>Пользователи</span></a></li>
             </ul>
             <!-- /.sidebar-menu -->
         </section>
@@ -103,7 +104,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <section class="content">
 
                 <!-- Default box -->
-                @yield('content'))
+                @yield('content')
             <!-- /.box -->
 
             </section>

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class TagController extends Controller
+class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::all();
-        return view('admin.tags.index', ['tags' => $tags]);
+        return view('admin.layout');
     }
 
     /**
@@ -26,7 +24,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('admin.tags.create');
+        //
     }
 
     /**
@@ -37,14 +35,7 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        $tag = new Tag;
-        $this->validate($request, [
-            'title' => 'required'
-        ]);
-        $tag->title = $request['title'];
-        $tag->save();
-
-        return redirect('admin/tags');
+        //
     }
 
     /**
@@ -55,8 +46,7 @@ class TagController extends Controller
      */
     public function show($id)
     {
-        $tag = Tag::find($id);
-        return view('admin.tags.edit', ['tag' => $tag]);
+        //
     }
 
     /**
@@ -67,8 +57,7 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        $tag = Tag::find($id);
-        return view('admin.tags.edit', ['tag' => $tag]);
+        //
     }
 
     /**
@@ -80,12 +69,7 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [//валидация форм
-            'title' => 'required'//обязательно для заполнния
-        ]);
-        $tag = Tag::find($id);
-        $tag->update($request->all());
-        return redirect('admin/tags');
+        //
     }
 
     /**
@@ -96,7 +80,6 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        Tag::find($id)->delete();
-        return redirect('admin/tags');
+        //
     }
 }

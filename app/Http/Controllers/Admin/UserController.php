@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Tag;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class TagController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::all();
-        return view('admin.tags.index', ['tags' => $tags]);
+        $users = User::all();
+        return view('admin.users.index', ['users' => $users]);
     }
 
     /**
@@ -26,7 +26,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('admin.tags.create');
+        return view('admin.users.create');
     }
 
     /**
@@ -37,14 +37,16 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        $tag = new Tag;
         $this->validate($request, [
-            'title' => 'required'
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+            'avatar' => 'nullable|image'
         ]);
-        $tag->title = $request['title'];
-        $tag->save();
-
-        return redirect('admin/tags');
+        $user = User::add($request->all());
+        $user->generatePassword($request->get('password'));
+        $user->uploadAvatar($request->file('avatar'));
+        return redirect('admin/users');
     }
 
     /**
@@ -55,8 +57,8 @@ class TagController extends Controller
      */
     public function show($id)
     {
-        $tag = Tag::find($id);
-        return view('admin.tags.edit', ['tag' => $tag]);
+        $user = User::find($id);
+        return view('admin.users.edit', ['user' => $user]);
     }
 
     /**
@@ -67,8 +69,8 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        $tag = Tag::find($id);
-        return view('admin.tags.edit', ['tag' => $tag]);
+        $user = User::find($id);
+        return view('admin.users.edit', ['user' => $user]);
     }
 
     /**
@@ -80,23 +82,31 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [//валидация форм
-            'title' => 'required'//обязательно для заполнния
+        $user = User::find($id);
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => [
+                'required',
+                'email',
+               // Rule::unique('users')->ignore($user->id),
+            ],
+            'avatar' => 'nullable|image'
         ]);
-        $tag = Tag::find($id);
-        $tag->update($request->all());
-        return redirect('admin/tags');
+        $user->edit($request->all());
+        $user->generatePassword($request->get('password'));
+        $user->uploadAvatar($request->file('avatar'));
+        return redirect('admin/users');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Tag::find($id)->delete();
-        return redirect('admin/tags');
+        $user = User::find($id)->remove();
+        return redirect('admin/users');
     }
 }

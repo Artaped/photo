@@ -16,32 +16,55 @@
         <div class="box-body">
             <div class="">
                 <div class="box-header">
-                    <h2 class="box-title">Все тэги</h2>
+                    <h2 class="box-title">Все изображения</h2>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <a href="/admin/tags/create" class="btn btn-success btn-lg">Добавить</a> <br> <br>
+                    <a href="/admin/photos/create" class="btn btn-success btn-lg">Добавить</a> <br> <br>
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
                             <th>#</th>
                             <th>Название</th>
+                            <th>Категория</th>
+                            <th>Автор</th>
+                            <th>Изображение</th>
                             <th>Действия</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($tags as $tag):?>
+                        <?php foreach($photos as $photo) :?>
                         <tr>
-                            <td><?=$tag['id']?></td>
-                            <td><?=$tag['title']?></td>
+
+                            <td><?=$photo['id']?></td>
+                            <td><?= $photo['title']?></td>
+                            <td><?php
+                                if($photo['category_id'] === null){
+                                    echo 'без категории';
+                                }else{
+                                    foreach ($categorys as $category){
+                                        if($category['id'] == $photo['category_id']){
+                                            echo $category['title'];
+                                        }
+                                    }
+
+                                }?></td>
+                            <td><?= $photo->author->name?></td>
                             <td>
-                                <a href="/admin/tags/edit/<?=$tag['id']?>" class="btn btn-warning">
+                                <img src="{{$photo->getImage()}}" width="200">
+                            </td>
+                            <td>
+                                <a href="#" class="btn btn-info">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a href="/admin/photos/edit/<?=$photo['id']?>" class="btn btn-warning">
                                     <i class="fa fa-pencil"></i>
                                 </a>
-                                <a href="/admin/tags/destroy/<?=$tag['id']?>" class="btn btn-danger" onclick="return confirm('Вы уверены?');">
+                                <a href="/admin/photos/destroy/<?=$photo['id']?>" class="btn btn-danger" onclick="return confirm('Вы уверены?');">
                                     <i class="fa fa-remove"></i>
                                 </a>
                             </td>
+
                         </tr>
                         <?php endforeach;?>
 
@@ -50,6 +73,9 @@
                         <tr>
                             <th>#</th>
                             <th>Название</th>
+                            <th>Категория</th>
+                            <th>Автор</th>
+                            <th>Изображение</th>
                             <th>Действия</th>
                         </tr>
                         </tfoot>
@@ -64,4 +90,5 @@
         </div>
         <!-- /.box-footer-->
     </div>
+    <!-- /.box -->
 @endsection

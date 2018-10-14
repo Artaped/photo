@@ -1,6 +1,5 @@
 @extends('admin.layout')
 @section('content')
-    <!-- Default box -->
     <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title">Админ-панель</h3>
@@ -16,40 +15,59 @@
         <div class="box-body">
             <div class="">
                 <div class="box-header">
-                    <h2 class="box-title">Все тэги</h2>
+                    <h2 class="box-title">Все пользователи</h2>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <a href="/admin/tags/create" class="btn btn-success btn-lg">Добавить</a> <br> <br>
+                    <a href="/admin/users/create" class="btn btn-success btn-lg">Добавить</a> <br> <br>
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Название</th>
+                            <th>Имя</th>
+                            <th>Email</th>
+                            <th>Роль</th>
+                            <th>Аватар</th>
+                            <th>Статус</th>
                             <th>Действия</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($tags as $tag):?>
+                        <?php foreach ($users as $user):?>
                         <tr>
-                            <td><?=$tag['id']?></td>
-                            <td><?=$tag['title']?></td>
+                            <td><?=$user['id']?></td>
+                            <td><?=$user['name']?></td>
+                            <td><?=$user['email']?></td>
+                            <td><?=$user['role_mask']?></td>
+
                             <td>
-                                <a href="/admin/tags/edit/<?=$tag['id']?>" class="btn btn-warning">
+                                <img src="{{$user->getImage()}}" alt="">
+                            </td>
+                            <td>
+                                <span class="btn btn-success">Активный</span>
+                            </td>
+                            <td>
+                                {{--<a href="#" class="btn btn-info">--}}
+                                    {{--<i class="fa fa-eye"></i>--}}
+                                {{--</a>--}}
+                                <a href="/admin/users/edit/<?=$user['id'];?>" class="btn btn-warning">
                                     <i class="fa fa-pencil"></i>
                                 </a>
-                                <a href="/admin/tags/destroy/<?=$tag['id']?>" class="btn btn-danger" onclick="return confirm('Вы уверены?');">
+                                <a href="/admin/users/destroy/<?=$user['id']?>" class="btn btn-danger" onclick="return confirm('Вы уверены?');">
                                     <i class="fa fa-remove"></i>
                                 </a>
                             </td>
                         </tr>
                         <?php endforeach;?>
-
                         </tbody>
                         <tfoot>
                         <tr>
                             <th>#</th>
-                            <th>Название</th>
+                            <th>Имя</th>
+                            <th>Email</th>
+                            <th>Роль</th>
+                            <th>Аватар</th>
+                            <th>Статус</th>
                             <th>Действия</th>
                         </tr>
                         </tfoot>
