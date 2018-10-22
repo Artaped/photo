@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('pages._header', function ($view) {
+        view()->composer('pages.layout', function ($view) {
             $view->with('categorys', Category::all());
         });
     }

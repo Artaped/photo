@@ -16,12 +16,12 @@
     <section class="section main-content">
         <div class="container">
             <div class="columns  is-multiline">
-                <?php foreach ($photos as $photo):?>
+                @foreach ($photos as $photo)
                 <div class="column is-one-quarter">
                     <div class="card">
                         <div class="card-image">
                             <figure class="image is-4by3">
-                                <a href="/<?=$photo->title?>/<?=$photo['id']?>">
+                                <a href="/{{$photo->title}}/{{$photo->id}}">
                                     <img src="{{$photo->getImage()}}" alt="Placeholder image">
                                 </a>
                             </figure>
@@ -29,18 +29,18 @@
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-left">
-                                    <p class="title is-5"><a href="category.html"><?php
-                                            if($photo['category_id'] === null){
-                                                echo 'без категории';
-                                            }else{
-                                                foreach ($categorys as $category){
-                                                    if($category['id'] == $photo['category_id']){
-                                                        echo $category['title'];
-                                                    }
-                                                }
-
-                                            }?></a></p>
-                                    <p>Автор {{$photo->author->name}}</p>
+                                    <p class="title is-5"><a href="category.html">
+                                            @if($photo->category_id === null)
+                                                без категории
+                                            @else
+                                                @foreach ($categorys as $category)
+                                                    @if($category->id == $photo->category_id)
+                                                        {!! $category['title'] !!}
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        </a></p>
+                                    <p>Автор {!! $photo->author->name !!}</p>
                                 </div>
                                 <div class="media-right">
                                     <p  class="is-size-7">Размер: 1280x760</p>
@@ -50,7 +50,7 @@
                         </div>
                     </div>
                 </div>
-                <?php endforeach;?>
+                @endforeach
             </div>
         </div>
     </section>
