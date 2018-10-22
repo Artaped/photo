@@ -29,22 +29,24 @@
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-left">
-                                    <p class="title is-5"><a href="category.html">
+                                    <p class="title is-5">
                                             @if($photo->category_id === null)
                                                 без категории
                                             @else
                                                 @foreach ($categorys as $category)
                                                     @if($category->id == $photo->category_id)
+                                                    <a href="{{$category->title}}">
                                                         {!! $category['title'] !!}
+                                                    </a>
                                                     @endif
                                                 @endforeach
                                             @endif
-                                        </a></p>
+                                    </p>
                                     <p>Автор {!! $photo->author->name !!}</p>
                                 </div>
                                 <div class="media-right">
                                     <p  class="is-size-7">Размер: 1280x760</p>
-                                    <time datetime="2016-1-1" class="is-size-7">Добавлено: 12.02.2018</time>
+                                    <time datetime="2016-1-1" class="is-size-7">Добавлено: {!! $photo->date !!}</time>
                                 </div>
                             </div>
                         </div>

@@ -28,15 +28,15 @@
                     Главная
                 </a>
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="category.html">
+                    <a class="navbar-link" href="#">
                         Категории
                     </a>
                     <div class="navbar-dropdown is-boxed">
-                        <?php foreach ($categorys as $category):?>
-                        <a class="navbar-item" href="#">
-                            <?=$category['title']?>
+                        @foreach ($categorys as $category)
+                        <a class="navbar-item" href="{{$category->title}}">
+                            {!! $category->title !!}
                         </a>
-                        <?php endforeach;?>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
             <div class="navbar-end">
                 <div class="navbar-item">
                     <div class="field is-grouped">
-                        <?php if (Auth::check())  :?>
+                       @if (Auth::check())
                         <div class="dropdown is-hoverable">
                             <div class="dropdown-trigger">
                                 <button class="button is-primary" aria-haspopup="true" aria-controls="dropdown-menu4">
@@ -100,7 +100,7 @@
                                 <span>Выйти</span>
                             </a>
                         </p>
-                        <?php else: ?>
+                        @else
                         <p class="control">
                             <a class="button is-link" href="/login">
                                       <span class="icon">
@@ -117,7 +117,7 @@
                                 <span>Зарегистрироваться</span>
                             </a>
                         </p>
-                        <?php endif;?>
+                        @endif
 
                     </div>
                 </div>
@@ -132,9 +132,9 @@
             <div class="tabs">
                 <ul>
                     <li class="is-active"><a>Главная</a></li>
-                    <?php foreach ($categorys as $category):?>
-                    <li><a><?=$category['title']?></a></li>
-                    <?php endforeach;?>
+                    @foreach ($categorys as $category)
+                    <li><a href="{{$category->title}}">{!! $category->title !!}</a></li>
+                    @endforeach
                 </ul>
             </div>
             <p>

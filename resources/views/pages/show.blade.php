@@ -1,8 +1,5 @@
 @extends('pages.layout')
 @section('content')
-
-
-
     <div class="container main-content">
         <div class="columns">
             <div class="column"></div>
@@ -21,15 +18,15 @@
                                 </figure>
                             </div>
                             <p class="title is-4">
-                                Добавил: <a href="#"><?=$photo->author->name?></a>
+                                Добавил: {!! $photo->author->name !!}
                             </p>
                         </div>
 
                         <div class="content">
-                            <?=$photo['description']?>
+                            {!! $photo->description !!}
                             <br>
-                            <time datetime="2016-1-1" class="is-size-6 is-pulled-left">Добавлено: <?=$photo['data']?></time>
-                            <a href="/photos/download/<?=$photo['id']?>" class="button is-info is-pulled-right">Скачать</a>
+                            <time datetime="2016-1-1" class="is-size-6 is-pulled-left">Добавлено: {!! $photo->date !!}</time>
+                            <a href="/photos/download/{{$photo['id']}}" class="button is-info is-pulled-right">Скачать</a>
                             <div class="is-clearfix"></div>
                         </div>
                     </div>
@@ -43,17 +40,17 @@
 
         <div class="columns">
             <div class="column">
-                <h1 class="title">Другие фотографии от <a href=""><?=$photo->author->name?></a></h1>
+                <h1 class="title">Другие фотографии от {!! $photo->author->name !!}</h1>
             </div>
         </div>
 
         <div class="columns section">
-            <?php foreach($userImages as $photos):?>
+            @foreach($userImages as $photos)
             <div class="column is-one-quarter">
                 <div class="card">
                     <div class="card-image">
                         <figure class="image is-4by3">
-                            <a href="/pages/photo/<?= $photos['id'];?>">
+                            <a href="/{{$photos->category->title}}/{!! $photos->id !!}">
                                 <img src="{{$photos->getImage()}}">
                             </a>
                         </figure>
@@ -61,27 +58,27 @@
                     <div class="card-content">
                         <div class="media">
                             <div class="media-left">
-                                <p class="title is-5"><a href="/category/<?= $photos['category_id'];?>"><?php
-                                        if($photos['category_id'] === null){
-                                            echo 'без категории';
-                                        }else{
-                                            foreach ($categorys as $category){
-                                                if($category['id'] == $photo['category_id']){
-                                                    echo $category['title'];
-                                                }
-                                            }
+                                <p class="title is-5"><a href="/category/{!! $photos->category_id !!}>">
+                                        @if($photos['category_id'] === null)
+                                            без категории
+                                        @else
+                                            @foreach ($categorys as $category)
+                                                @if($category['id'] == $photo['category_id'])
+                                                    {!! $category->title !!}
+                                                @endif
+                                            @endforeach
 
-                                        }?></a></p>
+                                        @endif</a></p>
                             </div>
                             <div class="media-right">
-                                <p  class="is-size-7">Размер: </p>
-                                <time datetime="2016-1-1" class="is-size-7">Добавлено: <?= $photos['data']?></time>
+                                <p  class="is-size-7">Размер:  xxl </p>
+                                <time datetime="2016-1-1" class="is-size-7">Добавлено: {!! $photos->date !!}</time>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <?php endforeach;?>
+            @endforeach
 
         </div>
     </div>
