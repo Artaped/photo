@@ -9,6 +9,7 @@ use App\Category;
 use App\Tag;
 use App\User;
 
+
 class DashboardController extends Controller
 {
     public function index()
@@ -36,12 +37,12 @@ class DashboardController extends Controller
         $photos = $tag->posts()->paginate(2);
         return view('pages.list', compact('photos'));
     }
-    public function category($id)
+    public function category($slug)
     {
-        $category = Category::where('id', $id)->firstOrFail();
-        $photos = $category->photo()->paginate(2);
-        $categories = Category::all();
-        return view('pages.list', compact('photos', 'categories'));
+        $category = Category::where('slug', $slug)->firstOrFail();
+        $photos = $category->photo()->paginate(8);
+        $categorys = Category::all();
+        return view('pages.list', compact('photos', 'categorys'));
     }
 
 }

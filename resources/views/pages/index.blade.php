@@ -54,6 +54,9 @@
                 </div>
                 @endforeach
             </div>
+            <div class="pagination">
+                {{$photos->links()}}
+            </div>
         </div>
     </section>
 

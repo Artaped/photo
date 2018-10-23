@@ -65,7 +65,9 @@ Route::post('/profile/security', 'ProfileController@updatePass');
 
 
 Route::get('/', 'DashboardController@index');
+Route::get('/category/{slug}', 'DashboardController@category');
 Route::get('/{title}/{id}', 'DashboardController@show');
+
 
 
 

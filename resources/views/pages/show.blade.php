@@ -58,7 +58,7 @@
                     <div class="card-content">
                         <div class="media">
                             <div class="media-left">
-                                <p class="title is-5"><a href="/category/{!! $photos->category_id !!}>">
+                                <p class="title is-5"><a href="/category/{!! $photos->category_id !!}">
                                         @if($photos['category_id'] === null)
                                             без категории
                                         @else

@@ -28,12 +28,12 @@
                     Главная
                 </a>
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="#">
+                    <a class="navbar-link" href="/category">
                         Категории
                     </a>
                     <div class="navbar-dropdown is-boxed">
                         @foreach ($categorys as $category)
-                        <a class="navbar-item" href="{{$category->title}}">
+                        <a class="navbar-item" href="/category/{{$category->slug}}">
                             {!! $category->title !!}
                         </a>
                         @endforeach

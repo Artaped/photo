@@ -10,9 +10,9 @@ class Category extends Model
     use Sluggable;
 
     protected $fillable = ['title'];
-    public function photos()
+    public function photo()
     {
-        return $this->hasMany(Photos::class);//связь с постом
+        return $this->hasMany(Photo::class);//связь с постом
     }
     /**
      * Return the sluggable configuration array for this model.
